@@ -6,8 +6,7 @@ const gameData = {
             word: "OM1"
         },
         {
-            image: "https://i.postimg.cc/kGY4WG4b/Screenshot-2025-11-16-19-05-13-45-40deb401b9ffe8e1df2f1cc5ba480b12.jpg
-                ",
+            image: "https://i.postimg.cc/kGY4WG4b/Screenshot-2025-11-16-19-05-13-45-40deb401b9ffe8e1df2f1cc5ba480b12.jpg",
             word: "Fabric"
         },
         {
@@ -38,40 +37,29 @@ let gameState = {
     timeLeft: 30
 };
 
-// DOM Elements
-const screens = {
-    landing: document.getElementById('landing-page'),
-    game: document.getElementById('game-screen'),
-    levelComplete: document.getElementById('level-complete-screen'),
-    gameComplete: document.getElementById('game-complete-screen'),
-    leaderboard: document.getElementById('leaderboard-screen')
-};
+// Get all screen elements
+const landingPage = document.getElementById('landing-page');
+const gameScreen = document.getElementById('game-screen');
+const levelCompleteScreen = document.getElementById('level-complete-screen');
+const gameCompleteScreen = document.getElementById('game-complete-screen');
+const leaderboardScreen = document.getElementById('leaderboard-screen');
 
-// Initialize the game
-function initGame() {
-    // Event listeners
-    document.getElementById('start-game').addEventListener('click', startGame);
-    document.getElementById('submit-word').addEventListener('click', checkAnswer);
-    document.getElementById('next-level').addEventListener('click', nextLevel);
-    document.getElementById('play-again').addEventListener('click', resetGame);
-    document.getElementById('view-leaderboard').addEventListener('click', showLeaderboard);
-    document.getElementById('back-to-menu').addEventListener('click', backToMenu);
+// Show specific screen
+function showScreen(screen) {
+    // Hide all screens
+    landingPage.classList.remove('active');
+    gameScreen.classList.remove('active');
+    levelCompleteScreen.classList.remove('active');
+    gameCompleteScreen.classList.remove('active');
+    leaderboardScreen.classList.remove('active');
     
-    // Enter key support
-    document.getElementById('username').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') startGame();
-    });
-    
-    document.getElementById('word-input').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') checkAnswer();
-    });
-    
-    // Load leaderboard from localStorage
-    loadLeaderboard();
+    // Show the requested screen
+    screen.classList.add('active');
 }
 
 // Start the game
 function startGame() {
+    console.log("Start game clicked");
     const username = document.getElementById('username').value.trim();
     
     if (!username) {
@@ -83,12 +71,13 @@ function startGame() {
     gameState.currentLevel = 0;
     gameState.score = 0;
     
-    showScreen('game');
+    showScreen(gameScreen);
     loadLevel();
 }
 
 // Load current level
 function loadLevel() {
+    console.log("Loading level:", gameState.currentLevel + 1);
     const level = gameData.levels[gameState.currentLevel];
     
     // Update UI
@@ -96,11 +85,12 @@ function loadLevel() {
     document.getElementById('current-score').textContent = `Score: ${gameState.score}`;
     document.getElementById('current-level').textContent = `Level ${gameState.currentLevel + 1}/5`;
     
-    // Set image (you'll need to replace these with your actual images)
-    document.getElementById('game-image').src = level.image;
-    document.getElementById('game-image').alt = `Level ${gameState.currentLevel + 1} - Find the hidden word`;
+    // Set image
+    const gameImage = document.getElementById('game-image');
+    gameImage.src = level.image;
+    gameImage.alt = `Level ${gameState.currentLevel + 1} - Find the hidden word`;
     
-    // Clear input
+    // Clear input and focus
     document.getElementById('word-input').value = '';
     document.getElementById('word-input').focus();
     
@@ -146,6 +136,8 @@ function checkAnswer() {
     const userInput = document.getElementById('word-input').value.trim().toLowerCase();
     const correctWord = gameData.levels[gameState.currentLevel].word.toLowerCase();
     
+    console.log("Checking answer:", userInput, "Correct:", correctWord);
+    
     if (userInput === correctWord) {
         // Calculate points
         const isFinalLevel = gameState.currentLevel === gameData.levels.length - 1;
@@ -157,7 +149,7 @@ function checkAnswer() {
         // Show level complete screen
         document.getElementById('found-word').textContent = gameData.levels[gameState.currentLevel].word;
         document.getElementById('points').textContent = points;
-        showScreen('levelComplete');
+        showScreen(levelCompleteScreen);
         
         // Stop timer
         clearInterval(gameState.timer);
@@ -173,12 +165,12 @@ function nextLevel() {
     gameState.currentLevel++;
     
     if (gameState.currentLevel < gameData.levels.length) {
-        showScreen('game');
+        showScreen(gameScreen);
         loadLevel();
     } else {
         // Game complete
         document.getElementById('total-points').textContent = gameState.score;
-        showScreen('gameComplete');
+        showScreen(gameCompleteScreen);
         
         // Save score to leaderboard
         saveScore();
@@ -187,7 +179,7 @@ function nextLevel() {
 
 // Reset the game
 function resetGame() {
-    showScreen('landing');
+    showScreen(landingPage);
     document.getElementById('username').value = '';
     document.getElementById('username').focus();
 }
@@ -195,23 +187,12 @@ function resetGame() {
 // Show leaderboard
 function showLeaderboard() {
     displayLeaderboard();
-    showScreen('leaderboard');
+    showScreen(leaderboardScreen);
 }
 
 // Back to menu from leaderboard
 function backToMenu() {
-    showScreen('landing');
-}
-
-// Show specific screen
-function showScreen(screenName) {
-    // Hide all screens
-    Object.values(screens).forEach(screen => {
-        screen.classList.remove('active');
-    });
-    
-    // Show requested screen
-    screens[screenName].classList.add('active');
+    showScreen(landingPage);
 }
 
 // Leaderboard functions
@@ -274,8 +255,29 @@ function checkLeaderboardReset() {
     }
 }
 
+// Initialize event listeners when page loads
+function initEventListeners() {
+    document.getElementById('start-game').addEventListener('click', startGame);
+    document.getElementById('submit-word').addEventListener('click', checkAnswer);
+    document.getElementById('next-level').addEventListener('click', nextLevel);
+    document.getElementById('play-again').addEventListener('click', resetGame);
+    document.getElementById('view-leaderboard').addEventListener('click', showLeaderboard);
+    document.getElementById('back-to-menu').addEventListener('click', backToMenu);
+    
+    // Enter key support
+    document.getElementById('username').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') startGame();
+    });
+    
+    document.getElementById('word-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') checkAnswer();
+    });
+}
+
 // Initialize the game when page loads
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM loaded, initializing game...");
+    initEventListeners();
     checkLeaderboardReset();
-    initGame();
+    console.log("Game initialized successfully!");
 });
