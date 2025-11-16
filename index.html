@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenMind Hidden Words Challenge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Landing Page -->
+        <div id="landing-page" class="screen active">
+            <div class="logo-container">
+                <img src="logo.png" alt="OpenMind Logo" id="logo">
+            </div>
+            <h1>OpenMind Hidden Words Challenge</h1>
+            <p>Find hidden words related to mental health and mindfulness</p>
+            <div class="input-group">
+                <input type="text" id="username" placeholder="Enter your username" maxlength="20">
+                <button id="start-game">Start Game</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="game-header">
+                <div class="player-info">
+                    <span id="current-player">Player: </span>
+                    <span id="current-score">Score: 0</span>
+                </div>
+                <div class="level-info">
+                    <span id="current-level">Level 1/5</span>
+                    <span id="timer">30s</span>
+                </div>
+            </div>
+            
+            <div class="game-content">
+                <div class="image-container">
+                    <img id="game-image" src="" alt="Find the hidden word">
+                </div>
+                <div class="input-container">
+                    <input type="text" id="word-input" placeholder="Type the hidden word here">
+                    <button id="submit-word">Submit</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Level Complete Screen -->
+        <div id="level-complete-screen" class="screen">
+            <h2>Level Complete!</h2>
+            <p id="level-result">You found: <span id="found-word"></span></p>
+            <p id="points-earned">Points earned: <span id="points">0</span></p>
+            <button id="next-level">Next Level</button>
+        </div>
+
+        <!-- Game Complete Screen -->
+        <div id="game-complete-screen" class="screen">
+            <h2>Game Complete!</h2>
+            <p id="final-score">Your final score: <span id="total-points">0</span></p>
+            <div class="actions">
+                <button id="play-again">Play Again</button>
+                <button id="view-leaderboard">View Leaderboard</button>
+            </div>
+        </div>
+
+        <!-- Leaderboard Screen -->
+        <div id="leaderboard-screen" class="screen">
+            <h2>Leaderboard</h2>
+            <div id="leaderboard-list"></div>
+            <button id="back-to-menu">Back to Menu</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
