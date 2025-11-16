@@ -2,24 +2,25 @@
 const gameData = {
     levels: [
         {
-            image: "level1.jpg",
+            image: "https://i.postimg.cc/yNdYWJwL/Screenshot-2025-11-16-15-56-25-71-84c9ef400ab248a2e4a3b31139e21163.jpg",
             word: "OM1"
         },
         {
-            image: "level2.jpg",
+            image: "https://i.postimg.cc/kGY4WG4b/Screenshot-2025-11-16-19-05-13-45-40deb401b9ffe8e1df2f1cc5ba480b12.jpg
+                ",
             word: "Fabric"
         },
         {
-            image: "level3.jpg",
+            image: "https://i.postimg.cc/kXwNhvVY/Screenshot-2025-11-16-19-13-45-72-40deb401b9ffe8e1df2f1cc5ba480b12.jpg",
             word: "AGI"
         },
         {
-            image: "level4.jpg",
+            image: "https://i.postimg.cc/hjgfBN6m/Screenshot-2025-11-16-19-08-20-75-40deb401b9ffe8e1df2f1cc5ba480b12.jpg",
             word: "SDK"
         },
         {
-            image: "level5.jpg",
-            word: "IRL"
+            image: "https://i.postimg.cc/x1cmpDV2/Screenshot-2025-11-16-19-10-57-12-40deb401b9ffe8e1df2f1cc5ba480b12.jpg",
+            word: "API"
         }
     ],
     scores: {
