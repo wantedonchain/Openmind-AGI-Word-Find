@@ -1,0 +1,253 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #f5e3b3 0%, #d4af37 100%);
+    color: #5a4a1f;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+}
+
+.screen {
+    display: none;
+    padding: 30px;
+    text-align: center;
+}
+
+.screen.active {
+    display: block;
+}
+
+/* Logo Styling */
+.logo-container {
+    margin-bottom: 20px;
+}
+
+#logo {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Typography */
+h1 {
+    color: #8b6914;
+    margin-bottom: 15px;
+    font-size: 2.2rem;
+}
+
+h2 {
+    color: #8b6914;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+/* Input and Button Styling */
+.input-group, .input-container {
+    margin: 25px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+input {
+    padding: 12px 15px;
+    border: 2px solid #d4af37;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 300px;
+    background-color: #fffdf5;
+    transition: all 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #b8941f;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.3);
+}
+
+button {
+    padding: 12px 25px;
+    background: linear-gradient(to bottom, #d4af37, #b8941f);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background: linear-gradient(to bottom, #b8941f, #9c7c17);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Game Screen Styling */
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px 15px;
+    background-color: #f8f0d5;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.player-info, .level-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.image-container {
+    margin: 20px 0;
+    border: 3px solid #d4af37;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#game-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Level Complete Screen */
+#level-result, #points-earned {
+    font-size: 1.2rem;
+    margin: 15px 0;
+}
+
+#found-word, #points {
+    font-weight: bold;
+    color: #8b6914;
+}
+
+/* Game Complete Screen */
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+/* Leaderboard */
+#leaderboard-list {
+    margin: 25px 0;
+    text-align: left;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.leaderboard-item {
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    background-color: #f8f0d5;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.leaderboard-rank {
+    font-weight: bold;
+    color: #8b6914;
+    min-width: 30px;
+}
+
+.leaderboard-name {
+    flex-grow: 1;
+    text-align: left;
+    padding: 0 15px;
+}
+
+.leaderboard-score {
+    font-weight: bold;
+    color: #8b6914;
+    min-width: 80px;
+    text-align: right;
+}
+
+/* Timer Animation */
+#timer {
+    font-weight: bold;
+    color: #8b6914;
+    transition: color 0.5s;
+}
+
+.timer-warning {
+    color: #e74c3c !important;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        border-radius: 10px;
+    }
+    
+    .screen {
+        padding: 20px;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .game-header {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .actions {
+        flex-direction: column;
+    }
+    
+    button {
+        width: 100%;
+        max-width: 300px;
+    }
+}
